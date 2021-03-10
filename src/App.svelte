@@ -1,25 +1,31 @@
 <script>
 	export let name;
+	// importing our components
 	import Greeting from './Greeting.svelte';
 	import Math from './Math.svelte';
+	// our user object with a 'loggedIn' value
 	export let user = { loggedIn: false }
-
+	// a simple toggle function: if the user is logged in, log them out
 	function loginToggle() {
 		user.loggedIn = !user.loggedIn;
 	}
 </script>
-{#if user.loggedIn}
+
+{#if user.loggedIn} <!-- our Svelte conditional statement: if the user is logged in, show this stuff: -->
  <button on:click={loginToggle}>Log Out</button>
- {:else}
- <button on:click={loginToggle}>Log In</button>
- {/if}
-{#if user.loggedIn}
-<main>
+ <main>
 	<h1>Hello {name}!</h1>
-	<Greeting firstName="Your" lastName="Name" />
-	<Math result=0 />
+	<!-- Display our Greeting component, with some default values for our component props -->
+	<Greeting firstName='George' lastName='Bentley' />
 </main>
-{/if}
+ {:else} <!-- otherwise (i.e. if the user is not logged in) show this other stuff: -->
+ <button on:click={loginToggle}>Log In</button>
+ <main>
+	 <!-- display our Math component -->
+	 <Math result=0 />
+</main>
+ {/if} <!-- end the conditional statement -->
+
 <style>
 	main {
 		text-align: center;
